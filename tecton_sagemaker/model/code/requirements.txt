@@ -1,3 +1,0 @@
-joblib==1.0.1
-dill==0.3.4
-tecton==0.1.7
