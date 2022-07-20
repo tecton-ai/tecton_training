@@ -1,18 +1,12 @@
-from tecton import BatchDataSource, FileDSConfig, inlined
+from tecton import BatchSource, FileConfig
 
-@inlined
-def cast_timestamp(df):
-    from pyspark.sql import functions as F
-    return df.withColumn("timestamp", F.to_timestamp("timestamp", "yyyy-MM-dd HH:mm:ss"))
-
-transactions_batch = BatchDataSource(
+transactions_batch = BatchSource(
     name='transactions_batch',
-    batch_ds_config=FileDSConfig(
-        timestamp_column_name="timestamp",
+    batch_config=FileConfig(
+        timestamp_field="timestamp",
         uri="s3://tecton.ai.public/data/fraud_mini/transactions/transactions.parquet",
         file_format="parquet"
     ),
-    family='fraud_detection',
-    owner='matt@tecton.ai',
+    owner='jack@tecton.ai',
     tags={'release': 'production'}
 )
